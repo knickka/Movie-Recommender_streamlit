@@ -13,7 +13,10 @@ def fetch_poster(movie_id):
 
     response = requests.get(url, headers=headers).json()
 
-    path = "https://image.tmdb.org/t/p/original/" + response["poster_path"]
+    if 'success' in response:
+        path = "https://d32qys9a6wm9no.cloudfront.net/images/others/not_available/poster_500x735.png?t=1694458990"
+    else:
+        path = "https://image.tmdb.org/t/p/original/" + response["poster_path"]
     return path
 data = pd.read_csv("data.csv")
 vectors = pickle.load(open('similarity.pkl','rb'))
